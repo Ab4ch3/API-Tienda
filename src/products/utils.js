@@ -6,24 +6,35 @@ const excelGenerator = (products, name, res) => {
     delete product._id;
     return {
       id,
-      ...product,
+      ...product.product,
     };
+    // return {
+    //   product: { id, ...product.product },
+    // };
   });
+  console.log(products);
+  let headingColumnIndex = 1;
+  let headersExcel = Object.keys(products[0]);
+
   // Generamos el libro de excel
   let wb = new xl.Workbook();
   // Genera un hoja del excel
-  let ws = wb.addWorksheet("Inventario");
+  let ws = wb.addWorksheet("inventario");
 
-  for (let i = 1; i <= products.length; i++) {
-    for (let j = 1; j < Object.values(products[0]).length; j++) {
-      let data = Object.values(products[i - 1])[j - 1];
-      if (typeof data === "string") {
-        ws.cell(i, j).string(data);
-      } else {
-        ws.cell(i, j).number(data);
-      }
-    }
-  }
+  headersExcel.forEach((heading) => {
+    ws.cell(1, headingColumnIndex++).string(heading);
+  });
+
+  let rowIndex = 2;
+  products.forEach((product) => {
+    let columnIndex = 1;
+    Object.keys(product).forEach((productKey) => {
+      ws.cell(rowIndex, columnIndex++)[typeof product[productKey]](
+        product[productKey]
+      );
+    });
+    rowIndex++;
+  });
 
   wb.write(`${name}.xlsx`, res);
 };
