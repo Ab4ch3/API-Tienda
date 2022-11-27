@@ -3,6 +3,7 @@
 const { ObjectId } = require("mongodb");
 // importamos el archivo de la base de datos
 const { Database } = require("../database/index");
+const { ProdutsUtils } = require("./utils.js");
 
 // Especificamo la coleccion que la cual llamaremos en la base de datos
 const COLLECTION = "products";
@@ -29,8 +30,14 @@ const create = async (product) => {
   return result.insertedId;
 };
 
+const generateReport = async (name, res) => {
+  let products = await getAll();
+  ProdutsUtils.excelGenerator(products, name, res);
+};
+
 module.exports.ProductsService = {
   getAll,
   getById,
   create,
+  generateReport,
 };
