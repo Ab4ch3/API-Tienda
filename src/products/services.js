@@ -29,6 +29,13 @@ const create = async (product) => {
   // le pedimos que nos devuelva en caso de crear el podructo el objectID
   return result.insertedId;
 };
+const deleted = async (id) => {
+  // Le pasamos la coleccion con el cual realizara la conexion
+  const collection = await Database(COLLECTION);
+  // disparamos una accion de mongodb y guardamos el resultado en result
+  let result = await collection.deleteOne({ _id: ObjectId(id) });
+  return result;
+};
 
 const generateReport = async (name, res) => {
   let products = await getAll();
@@ -40,4 +47,5 @@ module.exports.ProductsService = {
   getById,
   create,
   generateReport,
+  deleted,
 };

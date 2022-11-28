@@ -56,6 +56,21 @@ module.exports.ProductsController = {
       // res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  //Eliminar producto
+  deleteProduct: async (req, res) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      const productDeleted = await ProductsService.deleted(id);
+      productDeleted.deletedCount === 1
+        ? Response.success(res, 200, `Producto eliminado`, productDeleted)
+        : Response.error(res, new createError.NotFound());
+    } catch (error) {
+      debug(error);
+      Response.error(res);
+    }
+  },
   generateReport: (req, res) => {
     try {
       ProductsService.generateReport("Inventario", res);
