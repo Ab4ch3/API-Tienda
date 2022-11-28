@@ -13,7 +13,8 @@ module.exports.ProductsAPI = (app) => {
     .get("/report", ProductsController.generateReport)
     .post("/", ProductsController.createProduct) //http:localhosts:3000/api/products/
     .get("/:id", ProductsController.getProduct) //http:localhosts:3000/api/products/23
-    .delete("/:id", ProductsController.deleteProduct);
+    .delete("/:id", ProductsController.deleteProduct)
+    .put("/:id", ProductsController.updateProduct);
 
   // Le especificamos que app prodra usar en un endPoint especifico, las peticiones especificas en router para este modulo
   app.use("/api/products", router);

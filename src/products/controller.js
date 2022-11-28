@@ -56,6 +56,26 @@ module.exports.ProductsController = {
       // res.status(500).json({ message: "Internal Server Error" });
     }
   },
+  //Update Product
+  updateProduct: async (req, res) => {
+    //destructuramos los parametros por id y el body
+    try {
+      const {
+        params: { id },
+      } = req;
+      const { body } = req;
+      // Guardamos la respuesta del servicio, luego de pasarle los parametros
+      let productUpdate = await ProductsService.update(id, body);
+      if (!productUpdate)
+        return Response.error(res, new createError.NotFound());
+
+      Response.success(res, 200, `Producto ${id} modificado`, Object(body));
+    } catch (error) {
+      debug(error);
+      Response.error(res);
+    }
+  },
+
   //Eliminar producto
   deleteProduct: async (req, res) => {
     try {
@@ -71,6 +91,13 @@ module.exports.ProductsController = {
       Response.error(res);
     }
   },
+
+  // deleteP: async (req, res) => {
+  //   let product = await ProductsService.getById(res.id);
+  //   if (!product) return Response.error(res, new createError.NotFound());
+
+  //   return Response.success(res, 200, `Producto eliminado`, productDeleted);
+  // },
   generateReport: (req, res) => {
     try {
       ProductsService.generateReport("Inventario", res);

@@ -29,6 +29,19 @@ const create = async (product) => {
   // le pedimos que nos devuelva en caso de crear el podructo el objectID
   return result.insertedId;
 };
+
+const update = async (id, product) => {
+  // Le pasamos la coleccion con el cual realizara la conexion
+  const collection = await Database(COLLECTION);
+  //modificamos el objeto seleccionado
+  let result = await collection.updateOne(
+    { _id: ObjectId(id) },
+    { $set: { product } }
+  );
+  //mostramos resultado
+  return result;
+};
+
 const deleted = async (id) => {
   // Le pasamos la coleccion con el cual realizara la conexion
   const collection = await Database(COLLECTION);
@@ -48,4 +61,5 @@ module.exports.ProductsService = {
   create,
   generateReport,
   deleted,
+  update,
 };
