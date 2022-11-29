@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "export DEBUG=app:* && nodemon index.js"
+    "dev": "export DEBUG=app:* && nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
