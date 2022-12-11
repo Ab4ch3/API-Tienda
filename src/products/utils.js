@@ -12,7 +12,7 @@ const excelGenerator = (products, name, res) => {
     //   product: { id, ...product.product },
     // };
   });
-  console.log(products);
+  // console.log(products);
   let headingColumnIndex = 1;
   let headersExcel = Object.keys(products[0]);
 
