@@ -44,6 +44,23 @@ module.exports.UserController = {
       Response.error(res);
     }
   },
+
+  updateUser: async (req, res) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      const { body } = req;
+      let userUpdate = await usersService.update(id, body);
+      if (!userUpdate) return Response.error(res, new createError.NotFound());
+
+      Response.success(res, 200, `User ${id} modificado`, Object(body));
+    } catch (error) {
+      debug(error);
+      Response.error(res);
+    }
+  },
+
   deleteUser: async (req, res) => {
     try {
       const {

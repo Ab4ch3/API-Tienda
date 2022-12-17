@@ -9,7 +9,8 @@ module.exports.UserAPI = (app) => {
     .get("/", UserController.getUsers)
     .get("/:id", UserController.getUser)
     .post("/", UserController.createUser)
-    .delete("/:id", UserController.deleteUser);
+    .delete("/:id", UserController.deleteUser)
+    .put("/:id", UserController.updateUser);
 
   app.use("/api/users", router);
 };

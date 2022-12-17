@@ -18,6 +18,15 @@ const create = async (user) => {
   return result.insertedId;
 };
 
+const update = async (id, user) => {
+  const collection = await Database(COLLECTION);
+  let result = await collection.updateOne(
+    { _id: ObjectId(id) },
+    { $set: { user } }
+  );
+  return result;
+};
+
 const deleted = async (id) => {
   const collection = await Database(COLLECTION);
   let result = await collection.deleteOne({ _id: ObjectId(id) });
@@ -28,4 +37,5 @@ module.exports.usersService = {
   getById,
   create,
   deleted,
+  update,
 };
