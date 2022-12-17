@@ -8,7 +8,7 @@ var connection = null;
 module.exports.Database = (collection) =>
   new Promise(async (res, rej) => {
     // Trabajamos asyncrono porq el driver de mongo trabaja de esa manera
-    //Esta manera de trabar se llama singletone que es para no saturar el servidor de base de datos con conexiones
+    //Esta manera de trabajar se llama singletone que es para no saturar el servidor de base de datos con conexiones
     try {
       // Si no existe una conexion creara una
       if (!connection) {
