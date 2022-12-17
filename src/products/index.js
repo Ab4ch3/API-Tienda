@@ -16,6 +16,6 @@ module.exports.ProductsAPI = (app) => {
     .delete("/:id", ProductsController.deleteProduct)
     .put("/:id", ProductsController.updateProduct);
 
-  // Le especificamos que app prodra usar en un endPoint especifico, las peticiones especificas en router para este modulo
+  // Le especificamos que app podra usar en un endPoint especifico, las peticiones especificas en router para este modulo
   app.use("/api/products", router);
 };
